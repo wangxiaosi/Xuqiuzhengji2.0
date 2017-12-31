@@ -1,0 +1,10 @@
+/* 鼠标滑过，改变颜色 */
+.liulan ul li a:hover
+{ 
+	color:#fff;
+}
+/* 呈块状显示 */
+.liulan ul li
+{
+	display:block;
+}

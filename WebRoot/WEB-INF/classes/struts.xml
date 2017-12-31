@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "dtd/struts-2.0.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.i18n.encoding" value="utf-8" />
+    <package name="registration" namespace="/" extends="struts-default">
+    <!-- package和Java中包的作用相同，用来区分相同的子文件。这里是action -->
+        
+        <action name="RegisterAction" class="com.sisi.action.RegisterAction">
+            <result name="true">/login.html</result>
+        </action>
+        
+        <action name="loginAction" class="com.sisi.action.LoginAction">
+            <result name="true">/mains/Main.jsp</result>
+            <result name="loginfail">/mains/LoginFail.jsp</result>
+            <result name="checkcodewrong">/mains/CheckCodeWrong.jsp</result>
+        </action>
+        
+        <action name="powerControl" class="com.sisi.action.LoginAction" method="powerControl">
+        </action>
+        
+        <action name="InstitutionInfoAddAction" class="com.sisi.action.InstitutionInfoAddAction">
+            <result name="true">/user/serveyTableAdd.jsp</result> 
+            <result name="fail">/user/institutionTableAdd.jsp</result>
+        </action>
+        
+        <action name="DemandInfoAddAction" class="com.sisi.action.DemandInfoAddAction">
+            <result name="true">/user/serveyTableAdd.jsp</result>
+        </action>
+        
+        <action name="demandEdit" class="com.sisi.action.DemandInfoManageAction" method="demandEdit">
+            <result name="true">/user/serveyManage.jsp</result>
+        </action>
+        
+        <action name="showInfo" class="com.sisi.action.InstitutionInfoAddAction" method="showInfo">
+            <result name="true">/user/userinfo.jsp</result>
+        </action>
+        
+        <action name="ModifyPassword" class="com.sisi.action.ModifyPasswordAction">
+            <result name="true">/user/modifyPassword.jsp</result>
+        </action>
+        
+        <action name="demanWeishenhe" class="com.sisi.action.DemandShenheAction" method="demandWeishenhe">
+            <result name="true">/xing/weiShenHe.jsp</result>
+        </action>
+        
+        <action name="demanInfo" class="com.sisi.action.DemandShenheAction" method="demanInfo">
+            <result name="true">/xing/demandInfo.jsp</result>
+        </action>
+        
+        <action name="demanYishenhe" class="com.sisi.action.DemandShenheAction" method="demandYishenhe">
+            <result name="true">/xing/yiShenHe.jsp</result>
+        </action>
+        
+        <action name="tijiaoXing" class="com.sisi.action.DemandShenheAction" method="tijiaoXing">
+            <result name="true">/xing/welcome.jsp</result>
+        </action>
+        
+        <action name="tijiaoBu" class="com.sisi.action.DemandShenheAction" method="tijiaoBu">
+            <result name="true">/bu/welcome.jsp</result>
+        </action>
+        
+        <action name="demandWeishenheBu" class="com.sisi.action.DemandShenheAction" method="demandWeishenheBu">
+            <result name="true">/bu/weiShenHe.jsp</result>
+        </action>
+        
+        <action name="demandYishenheBu" class="com.sisi.action.DemandShenheAction" method="demandYishenheBu">
+            <result name="true">/bu/yiShenHe.jsp</result>
+        </action>
+        <!--部门审核的需求详情 -->
+        <action name="demanInfo1" class="com.sisi.action.DemandShenheAction" method="demanInfo">
+            <result name="true">/bu/demandInfo1.jsp</result>
+        </action>
+        <!--查询 -->
+        <action name="search" class="com.sisi.action.DemandSearchAction" method="search">
+            <result name="true">/admin/result.jsp</result>
+        </action>
+        <!--查询出结果详情 -->
+        <action name="demanInfo2" class="com.sisi.action.DemandSearchAction" method="searchDemandById">
+            <result name="true">/admin/demandInfo.jsp</result>
+        </action>
+        
+        <!--删除用户选中需求信息 -->
+        <action name="demandDelete" class="com.sisi.action.DemandInfoManageAction" method="demandDelete">
+            <result name="true">/bu/welcome.jsp</result>
+        </action>
+        
+        <!--更新用户选中需求信息中显示用户信息 -->
+        <action name="demandUpdate" class="com.sisi.action.DemandInfoManageAction" method="demandUpdate">
+            <result name="true">/user/serveyTableUpdate.jsp</result>
+        </action>
+        
+        <!--更新用户选中需求信息，真正修改用户信息 -->
+        <action name="demandUpdate1" class="com.sisi.action.DemandInfoManageAction" method="demandUpdate1">
+            <result name="true">/bu/welcome.jsp</result>
+        </action>
+        <!--显示归口管理部门多选框内容 -->
+        <action name="showGui" class="com.sisi.action.ShowSelectBoxAction" method="showGui">
+        </action>
+        <!--显示所在地域多选框内容 -->
+        <action name="showSuo" class="com.sisi.action.ShowSelectBoxAction" method="showSuo">
+        </action>
+        
+        <!--在用户的机构信息填报界面显示机构已填的信息 -->
+        <action name="ShowYitianInstitutionInfo" class="com.sisi.action.ShowSelectBoxAction" method="showJigou">
+        </action>
+        
+        <!--显示搜索界面树形结构一级-->
+        <action name="showShu" class="com.sisi.action.ShowSelectBoxAction" method="showYi">
+        </action>
+        
+        <!--显示搜索界面树形结构二级-->
+        <action name="showShu1" class="com.sisi.action.ShowSelectBoxAction" method="showEr">
+        </action>
+        
+        <!--按照学科分类查找-->
+        <action name="Demand_showXKFL" class="com.sisi.action.DemandSearchAction" method="searchDemandByXueke">
+        	<result name="true">/admin/resultXueke.jsp</result>
+        </action>
+        
+    </package>
+</struts>

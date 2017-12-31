@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--框架必需start-->
+<script type="text/javascript" src="../js/jquery-1.4.js">
+	
+</script>
+<script type="text/javascript" src="../js/framework.js">
+</script>
+<link href="../css/import_basic.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" id="skin" />
+<!--框架必需end-->
+<script type="text/javascript" src="../js/nav/ddaccordion.js">
+	
+</script>
+<script type="text/javascript" src="../js/text/text-overflow.js">
+	
+</script>
+<style>
+a {
+	
+}
+
+.categoryitems span {
+	width: 160px;
+}
+</style>
+<script>
+	//打开内页时出现进度条
+	
+	function ccc() {
+		doAjax("../Removeabc", null, function(rstText) {
+			var result = eval('(' + rstText + ')');
+			if (result.status == 'OK') {
+				alert("查询成功");
+				return true;
+			} else {
+				alert("查询失败");
+				return false;
+			}
+		});
+	}
+
+	function getXMLHttpResquest() {
+		var request;
+		if (window.XMLHttpRequest) {
+			request = new XMLHttpRequest();
+		} else {
+			try {
+				request = new ActiveXObject("Microsoft.XMLHTTP");
+			} catch (e) {
+				request = new ActiveXObject("Msxml2.XMLHTTP");
+			}
+		}
+		return request;
+	}
+
+	function doAjax(url, params, callBack) {
+		var req = getXMLHttpResquest();
+		if (req != null) {
+			req.onreadystatechange = function() {
+				if (req.readyState == 4) {
+					if (200 == req.status) {
+						callBack(req.responseText);
+
+					} else if (404 == req.status) {
+						alert('404-HTTP请求路径错误！');
+					} else if (500 == req.status) {
+						alert('500-HTTP请求路径错误！');
+					}
+
+				}
+
+			};
+			req.open("POST", url, true);
+			req.setRequestHeader("Content-Type","application/x-www-form-urlencoded;;charset=utf-8");
+			req.send(params);
+		}
+	}
+	$(function() {
+		var power;
+		var html = "";
+		$.ajax({
+					url : "../powerControl",
+					type : "post",
+					dataType : "text",
+					success : function(data) {
+											if (data == 1) {
+												html += "<li><a href='../admin/userManage.jsp' target='frmright'><span>用户管理</span></a></li>"
+														+"<li><a href='../admin/powerManage.jsp' target='frmright'><span>权限管理</span></a></li>"
+														+"<li><a href='../admin/roleManage.jsp' target='frmright'><span>角色管理</span></a></li>"
+														+"<li><a href='../admin/modifyPassword.jsp' target='frmright'><span>修改密码</span></a></li>"
+														+"<li><a href='../admin/search.jsp' target='frmright'><span>统计查询</span></a></li>"
+														+"<li><a href='../admin/fenlei.jsp' target='frmright'><span>分类浏览</span></a></li>";
+											}
+											else if(data == 2){
+											    html += "<li><a href='demanWeishenhe.action' target='frmright'><span>未审核需求</span></a></li>"
+				                					    +"<li><a href='demanYishenhe.action' target='frmright'><span>已审核需求</span></a></li>"
+				                						+"<li><a href='../xing/modifyPassword.jsp' target='frmright'><span>修改密码</span></a></li>";
+											
+											}
+											else if(data == 3){
+												html += "<li><a href='../user/institutionTableAdd.jsp' target='frmright'><span>机构信息填报</span></a></li>"
+														+"<li><a href='../user/serveyTableAdd.jsp' target='frmright'><span>需求填报</span></a></li>"
+														+"<li><a href='demandEdit.action' target='frmright'><span>我的需求</span></a></li>"
+														+"<li><a href='showInfo.action' target='frmright'><span>我的信息</span></a></li>"
+														+"<li><a href='../user/modifyPassword.jsp' target='frmright'><span>修改密码</span></a></li>";
+											}
+											else if(data == 4){
+												html += "<li><a href='demandWeishenheBu.action' target='frmright'><span>未审核需求</span></a></li>"
+				                						+"<li><a href='demandYishenheBu.action' target='frmright'><span>已审核需求</span></a></li>"
+				                						+"<li><a href='../bu/modifyPassword.jsp' target='frmright'><span>修改密码</span></a></li>";
+											}
+								$("#category").html(html);
+                                }
+										});
+					});
+</script>
+<body leftFrame="true">
+	<div id="scrollContent">
+		<div class="arrowlistmenu">
+			<div class="menuheader expandable">系统菜单</div>
+			<ul class="categoryitems" id="category">
+			</ul>
+	        </div>
+		</div>
+</body>
+</html>
